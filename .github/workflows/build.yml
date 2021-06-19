@@ -1,0 +1,44 @@
+name: Android build CI
+
+on: 
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 1 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build with Gradle
+      run: |
+         chmod +x gradlew
+         ./gradlew assembleRelease
+    - name: Sign app APK
+       uses: r0adkll/sign-android-release@v1
+       with:
+         releaseDirectory: app/build/outputs/apk/release
+         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+         alias: ${{ secrets.ALIAS }}
+         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+         keyPassword: ${{ secrets.KEY_PASSWORD }}
+    - name : upload apk
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        path: "app/build/outputs/apk/release/*.apk"
+    - name: Send commit to telegram
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
+        message: |+
+          New push to github!
+          *${{ github.event.head_commit.message }}* by ${{ github.event.head_commit.author.name }}
+          See commit detail [here](${{ github.event.head_commit.url }})
+        document: "app/build/outputs/apk/release/*.apk"
