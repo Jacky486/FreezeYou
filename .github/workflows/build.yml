@@ -30,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        path: "app/build/outputs/apk/release/*signed.apk"
+        path: "app/build/outputs/apk/release/*-signed.apk"
     - name: Send commit to telegram
       uses: appleboy/telegram-action@master
       with:
@@ -41,4 +41,4 @@ jobs:
           New push to github!
           *${{ github.event.head_commit.message }}* by ${{ github.event.head_commit.author.name }}
           See commit detail [here](${{ github.event.head_commit.url }})
-        document: "app/build/outputs/apk/release/*signed.apk"
+        document: "app/build/outputs/apk/release/*-signed.apk"
