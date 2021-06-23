@@ -2,9 +2,6 @@
 name: update fork
 
 on: 
-  push:
-    branches:
-      - master 
   schedule:
     - cron: "0 0 * * *" #设置定时任务
 
