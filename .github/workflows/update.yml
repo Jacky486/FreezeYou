@@ -2,6 +2,9 @@
 name: update fork
 
 on: 
+  push:
+    branches:
+      - master 
   schedule:
     - cron: "0 0 * * *" #设置定时任务
 
@@ -14,10 +17,11 @@ jobs:
       with:
         ref: master
     - name: Pull (Fast-Forward) upstream changes
-      uses: aormsby/Fork-Sync-With-Upstream-action@v2.1
+      uses: aormsby/Fork-Sync-With-Upstream-action@v2.3
       with:
-        upstream_repository: FreezeYou/FreezeYou
-        upstream_branch: master
-        target_branch: master
+        upstream_repository: osfans/trime
+        upstream_branch: develop
+        target_branch: develop
         git_user: github-actions
         git_email: github-actions@github.com
+        git_pull_rebase_config: false
