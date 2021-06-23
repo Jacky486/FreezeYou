@@ -25,3 +25,4 @@ jobs:
         git_user: github-actions
         git_email: github-actions@github.com
         git_pull_rebase_config: false
+        git_pull_args: '--unshallow'
