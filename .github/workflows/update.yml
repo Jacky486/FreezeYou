@@ -19,9 +19,9 @@ jobs:
     - name: Pull (Fast-Forward) upstream changes
       uses: aormsby/Fork-Sync-With-Upstream-action@v2.3
       with:
-        upstream_repository: osfans/trime
-        upstream_branch: develop
-        target_branch: develop
+        upstream_repository: FreezeYou/FreezeYou
+        upstream_branch: master
+        target_branch: master
         git_user: github-actions
         git_email: github-actions@github.com
         git_pull_rebase_config: false
