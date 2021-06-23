@@ -19,3 +19,5 @@ jobs:
         upstream_repository: FreezeYou/FreezeYou
         upstream_branch: master
         target_branch: master
+        git_user: github-actions
+        git_email: github-actions@github.com
